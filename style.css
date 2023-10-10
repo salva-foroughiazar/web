@@ -1,0 +1,22 @@
+.container {
+    width: 500px;
+    margin: 15px auto;
+}
+.form input {
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-right: 8px;
+}
+.form button {
+    background-color: palevioletred;
+    color: #fff;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.form {
+    border-bottom: 1px solid #ccc;
+    margin: 15px 0;
+    padding: 15px 0;
+}
