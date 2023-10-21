@@ -17,8 +17,7 @@ function makeList(todoTitle) {
 
     const delete_btn = document.createElement("button");
     delete_btn.textContent = "Delete";
-    delete_btn.classList.add("delte");
-
+    delete_btn.classList.add("delete");
 
     item.appendChild(checkbox);
     item.appendChild(span);
@@ -33,6 +32,7 @@ function makeList(todoTitle) {
         remove_item(todoTitle.title)
     });
 }
+
 function clearInput() {
     input_value.value = "";
 }
@@ -44,6 +44,7 @@ function renderList() {
         makeList(item);
     }
 }
+
 function toggleStatus(title) {
     for (let i = 0; i < todo_list.length; i++) {
         if (todo_list[i].title === title) {
@@ -53,6 +54,7 @@ function toggleStatus(title) {
     console.log("todoarr", todo_list);
     syncStorage();
 }
+
 function remove_item(title) {
     for (let i = 0; i < todo_list.length; i++) {
         if (todo_list[i].title === title) {
@@ -62,7 +64,8 @@ function remove_item(title) {
     syncStorage();
     renderList();
 }
-function addItem(item){
+
+function addItem(item) {
     const next_item = {
         title: item.title,
         status: item.status,
@@ -71,37 +74,41 @@ function addItem(item){
     syncStorage();
 }
 
-
-function syncStorage(){
+function syncStorage() {
     const next_list = JSON.stringify(todo_list);
     localStorage.setItem("my_list", next_list);
 }
+
 function loadStorage() {
     const prev_list = JSON.parse(localStorage.getItem("my_list")) || [];
     todo_list = prev_list;
 }
+
 function OnAddItem() {
     const val = input_value.value;
-  
+
     if (val === "") {
-      alert("Please Fill the Text Area");
+        alert("Please Fill the Text Area");
     } else {
-      const item = {
-        title: val,
-        status: false,
-      };
-      addItem(item);
-      syncStorage();
-      renderItem(item);
-      clearInput();
+        const item = {
+            title: val,
+            status: false,
+        };
+        addItem(item);
+        syncStorage();
+        makeList(item);
+        clearInput();
     }
-  }
-  function events() {
+}
+
+function events() {
     add_button.addEventListener("click", OnAddItem);
-  }
+}
+
 function init() {
     loadStorage();
     renderList();
     events();
 }
+
 init();
