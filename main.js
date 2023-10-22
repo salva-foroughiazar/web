@@ -1,6 +1,8 @@
 const add_button = document.querySelector("#add-btn");
 const input_value = document.querySelector("#input");
 const list = document.querySelector(".list");
+const removeAll = document.querySelector("#rmv-btn");
+const statusSelect = document.getElementById("statusSelect");
 
 let todo_list = [];
 
@@ -51,7 +53,6 @@ function toggleStatus(title) {
             todo_list[i].status = !todo_list[i].status;
         }
     }
-    console.log("todoarr", todo_list);
     syncStorage();
 }
 
@@ -100,9 +101,28 @@ function OnAddItem() {
         clearInput();
     }
 }
-
+function OndeleteAll(){
+    const new_items = todo_list.filter((item) => {
+        return !item.status;
+    });
+    todo_list = new_items;
+    syncStorage();
+    renderList();
+}
+function Onfilter(){
+    const selectedStatus = statusSelect.value;
+    list.innerHTML = "";
+    for (let i = 0; i < todo_list.length; i++) {
+        const item = todo_list[i];
+        if (selectedStatus === "all" || (selectedStatus === "done" && item.status) || (selectedStatus === "todo" && !item.status)) {
+            makeList(item);
+        }
+    }
+}
 function events() {
     add_button.addEventListener("click", OnAddItem);
+    removeAll.addEventListener("click", OndeleteAll);
+    statusSelect.addEventListener("click", Onfilter);
 }
 
 function init() {
@@ -110,5 +130,4 @@ function init() {
     renderList();
     events();
 }
-
 init();
