@@ -1,6 +1,7 @@
-const add_button = document.querySelector("#add-btn");
-const input_value = document.querySelector("#input");
 const list = document.querySelector(".list");
+const input_value = document.querySelector("#input");
+const searchInput = document.getElementById("search-input");
+const add_button = document.querySelector("#add-btn");
 const removeAll = document.querySelector("#rmv-btn");
 const statusSelect = document.getElementById("statusSelect");
 
@@ -31,7 +32,7 @@ function makeList(todoTitle) {
     });
 
     delete_btn.addEventListener("click", () => {
-        remove_item(todoTitle.title)
+        remove_item(todoTitle.title);
     });
 }
 
@@ -42,7 +43,7 @@ function clearInput() {
 function renderList() {
     list.innerHTML = "";
     for (let i = 0; i < todo_list.length; i++) {
-        item = todo_list[i];
+        const item = todo_list[i];
         makeList(item);
     }
 }
@@ -61,7 +62,7 @@ function remove_item(title) {
         if (todo_list[i].title === title) {
             todo_list.splice(i, 1);
         }
-    };
+    }
     syncStorage();
     renderList();
 }
@@ -100,8 +101,10 @@ function OnAddItem() {
         makeList(item);
         clearInput();
     }
+
 }
-function OndeleteAll(){
+
+function OndeleteAll() {
     const new_items = todo_list.filter((item) => {
         return !item.status;
     });
@@ -109,7 +112,8 @@ function OndeleteAll(){
     syncStorage();
     renderList();
 }
-function Onfilter(){
+
+function Onfilter() {
     const selectedStatus = statusSelect.value;
     list.innerHTML = "";
     for (let i = 0; i < todo_list.length; i++) {
@@ -119,15 +123,43 @@ function Onfilter(){
         }
     }
 }
+
+function OnSearch() {
+    const searchQuery = searchInput.value.toLowerCase();
+
+    list.innerHTML = "";
+
+    for (let i = 0; i < todo_list.length; i++) {
+        const item = todo_list[i];
+        if (item.title.toLowerCase().includes(searchQuery)) {
+            makeList(item);
+        }
+    }
+    searchInput.value = "";
+}
+
+function loadTodoList() {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(data => {
+            todo_list = data;
+            renderList();
+        })
+        .catch(error => console.error('Error fetching data: ', error));
+}
+
 function events() {
     add_button.addEventListener("click", OnAddItem);
     removeAll.addEventListener("click", OndeleteAll);
-    statusSelect.addEventListener("click", Onfilter);
+    statusSelect.addEventListener("change", Onfilter);
+    searchInput.addEventListener("keyup", OnSearch);
 }
 
 function init() {
     loadStorage();
     renderList();
+    loadTodoList(); 
     events();
 }
+
 init();
