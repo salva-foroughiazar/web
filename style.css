@@ -1,26 +1,56 @@
 .container {
-    width: 500px;
-    margin: 15px auto;
+  width: 500px;
+  margin: 15px auto;
 }
 .form input {
-    padding: 5px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    margin-right: 8px;
-    margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-right: 8px;
+  margin-bottom: 20px;
 }
 .form button {
-    background-color: palevioletred;
-    color: #fff;
-    padding: 5px;
-    border-radius: 8px;
-    border: 1px solid #eee;
+  background-color: palevioletred;
+  color: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #eee;
 }
 .form {
-    border-bottom: 1px solid #ccc;
-    margin: 15px 0;
-    padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+  margin: 15px 0;
+  padding: 15px 0;
 }
 button {
-    cursor: pointer;
+  cursor: pointer;
+}
+.item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  position: relative;
+}
+.delete {
+  background-color: palevioletred;
+  border: 1px solid palevioletred;
+  color: #fff;
+  border-radius: 5px;
+  padding: 4px;
+  margin-left: 20px;
+  position: absolute;
+  right: 0;
+}
+.item span {
+  font-size: 14px;
+  line-height: 1.9em;
+  text-align: justify;
+}
+#statusSelect {
+  background: transparent;
+  border: 3px solid palevioletred;
+  border-radius: 6px;
+  padding: 5px;
+  margin-left: 15px;
+}
+#search-input {
+  width: 100%;
 }

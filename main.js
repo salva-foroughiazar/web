@@ -1,9 +1,9 @@
 const list = document.querySelector(".list");
 const input_value = document.querySelector("#input");
-const searchInput = document.getElementById("search-input");
+const searchInput = document.querySelector("#search-input");
 const add_button = document.querySelector("#add-btn");
 const removeAll = document.querySelector("#rmv-btn");
-const statusSelect = document.getElementById("statusSelect");
+const statusSelect = document.querySelector("#statusSelect");
 
 let todo_list = [];
 
